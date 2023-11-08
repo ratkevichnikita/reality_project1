@@ -1,12 +1,12 @@
-import './test.scss'
+import Home from "./pages/Home/home";
+import "./test.scss";
 
 function App() {
-
-  return <>
-    <div className={'test'}>
-      <p className={'test__one'}>It-reality</p>
-    </div>
-  </>;
+  return (
+    <>
+      <Home />
+    </>
+  );
 }
 
 export default App;
