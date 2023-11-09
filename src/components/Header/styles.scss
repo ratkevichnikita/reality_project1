@@ -1,54 +1,68 @@
 .header {
-  height: 100vh;
-
-  &__banner {
-    height: 590px;
-    margin-top: 20px;
-    background-image: url(../../assets/images/cover-header.png);
-    background-repeat: no-repeat;
-    background-position: 0 0;
-    background-size: contain;
+  &__wrapper {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    padding-top: 20px;
+  }
 
-    &-wrapper {
-      width: 415px;
-      height: 351px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+  &__list {
+    display: flex;
+    margin-left: 60px;
+    gap: 40px;
+    padding-top: 6px;
+  }
 
-      margin-right: 9px;
-      background-image: url(../../assets/images/heart.svg);
-      background-size: contain;
-      background-repeat: no-repeat;
+  &__item {
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 150%;
+    position: relative;
+
+    &_active::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 7px;
+      left: 0;
+      bottom: 4px;
+
+      background-color: rgba(255, 146, 146, 0.5);
     }
+  }
 
-    &-info {
-      margin-right: 91px;
-    }
+  &__utils {
+    display: flex;
+    margin-left: auto;
+    gap: 40px;
+    align-items: center;
+  }
 
-    &-number {
-      font-size: 216px;
-      font-weight: 700;
-      line-height: 73%;
-      letter-spacing: -13.8px;
-      text-align: end;
-    }
+  &__phone {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 150%;
+  }
+}
 
-    &-year {
-      font-size: 50px;
-      font-weight: 400;
-      line-height: 110%;
-      text-align: end;
-    }
+.basket {
+  position: relative;
 
-    &-text {
-      font-size: 22px;
-      font-weight: 400;
-      line-height: 100%;
-      font-style: italic;
-    }
+  &__counter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background-color: #ff9292;
+
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 150%;
+
+    position: absolute;
+    top: -9px;
+    right: -18px;
   }
 }
