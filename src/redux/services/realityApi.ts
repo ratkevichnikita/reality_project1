@@ -7,10 +7,13 @@ export const realityApi = createApi({
       "https://my-json-server.typicode.com/ratkevichnikita/fake_api_reality/db/",
   }),
   endpoints: (build) => ({
-    getCategories: build.query({
-      query: () => "categories",
+    getData: build.query({
+      query: () => ({
+        url: "/",
+        method: "GET",
+      }),
     }),
   }),
 });
 
-export const { useGetCategoriesQuery } = realityApi;
+export const { useGetDataQuery } = realityApi;
