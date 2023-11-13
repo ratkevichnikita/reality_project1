@@ -1,5 +1,7 @@
 import Header from "../../components/Header/Header";
+import Categories from "../../components/Categories/Categories";
 import "./styles.scss";
+
 
 const Home = () => {
   return (
@@ -16,6 +18,7 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <Categories />
     </>
   );
 };
