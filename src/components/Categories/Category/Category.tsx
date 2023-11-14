@@ -1,9 +1,11 @@
 import './Category.scss';
 
-export default function Category({
-  image,
-  label
-}) {
+type CategoryProps = {
+  image: string;
+  label: string
+}
+
+export default function Category({image, label}: CategoryProps) {
  
   return (
     <li className='category'>
