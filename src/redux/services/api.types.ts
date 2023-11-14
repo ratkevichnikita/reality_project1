@@ -1,4 +1,4 @@
-export type Product = {
+export type TProduct = {
   id: string;
   name: string;
   isSelected: boolean;
@@ -32,7 +32,7 @@ export type Product = {
   };
 };
 
-export type Promo = {
+export type TPromo = {
   image: string;
   bgImage: string;
   discount: string;
@@ -40,9 +40,15 @@ export type Promo = {
   description: string;
 };
 
-export type Category = {
-  name: string;
+export type TCategory = {
+  name?: string;
   label: string;
-  image: string | null;
-  count: number | null;
+  image: string | undefined;
+  count?: number | null;
+};
+
+export type TApiData = {
+  products: TProduct[];
+  promo: TPromo;
+  categories: TCategory[];
 };

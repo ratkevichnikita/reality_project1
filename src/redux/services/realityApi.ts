@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { Category } from "./api.types";
+import { TApiData } from "./api.types";
 
 export const realityApi = createApi({
   reducerPath: "realityApi",
@@ -8,7 +8,7 @@ export const realityApi = createApi({
       "https://my-json-server.typicode.com/ratkevichnikita/fake_api_reality/db/",
   }),
   endpoints: (build) => ({
-    getData: build.query<Category, void>({
+    getData: build.query<TApiData, void>({
       query: () => ({
         url: "/",
         method: "GET",
