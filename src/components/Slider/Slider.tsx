@@ -1,19 +1,37 @@
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
+import { TProduct } from "../../redux/services/api.types";
+import ProductItem from "../ProductItem/ProductItem";
+import SliderNavButtons from "./SliderNavButtons/SliderNavButtons";
 import "swiper/css";
+import "./styles.scss";
 
-const Slider = () => {
+type TSliderProps = {
+  slides: TProduct[];
+};
+
+const Slider = ({ slides }: TSliderProps) => {
   return (
-    <Swiper
-      spaceBetween={50}
-      slidesPerView={3}
-      // onSlideChange={() => console.log("slide change")}
-      // onSwiper={(swiper) => console.log(swiper)}
-    >
-      <SwiperSlide>Slide 1</SwiperSlide>
-      <SwiperSlide>Slide 2</SwiperSlide>
-      <SwiperSlide>Slide 3</SwiperSlide>
-      <SwiperSlide>Slide 4</SwiperSlide>
-    </Swiper>
+    <div className={"slider"}>
+      <SliderNavButtons />
+      <Swiper
+        navigation={{
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+          disabledClass: "swiper-button-disabled",
+        }}
+        modules={[Navigation]}
+        spaceBetween={30}
+        slidesPerView={4}
+        onSwiper={(swiper) => console.log(swiper)}
+      >
+        {slides.map((slide: TProduct) => (
+          <SwiperSlide key={slide.id}>
+            <ProductItem {...slide} />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </div>
   );
 };
 
