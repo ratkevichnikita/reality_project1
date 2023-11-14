@@ -10,13 +10,13 @@ const SliderNavButtons = () => {
   return (
     <div className={"swiper-buttons"}>
       <button
-        className={"swiper-button-prev"}
+        className={"swiper-button swiper-button-prev"}
         onClick={() => swiper.slidePrev()}
       >
         <img src={arrowLeft} alt="arrowLeft" />
       </button>
       <button
-        className={"swiper-button-next"}
+        className={"swiper-button swiper-button-next"}
         onClick={() => swiper.slideNext()}
       >
         <img src={arrowRight} alt="arrowRight" />
