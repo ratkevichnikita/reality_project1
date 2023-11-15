@@ -1,0 +1,35 @@
+.error-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  gap: 20px;
+  &__title {
+    font-size: 30px;
+    line-height: 130%;
+  }
+
+  &__text {
+    font-size: 20px;
+    line-height: 100%;
+  }
+
+  &__num {
+    font-size: 70px;
+    line-height: 100%;
+  }
+
+  &__link {
+    color: #4d6074;
+    background-color: #acc8e5;
+    padding: 5px 8px;
+    border: 1px solid currentColor;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+
+    &:hover {
+      filter: brightness(0.9);
+    }
+  }
+}
