@@ -43,7 +43,7 @@ export type TPromo = {
 export type TCategory = {
   name?: string;
   label: string;
-  image: string | undefined;
+  image: string;
   count?: number | null;
 };
 

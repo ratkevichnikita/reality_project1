@@ -2,8 +2,9 @@ import "./styles.scss";
 
 import { TProduct } from "../../redux/services/api.types";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
-const ProductItem = ({ discount, name, price, image }: TProduct) => {
+const ProductItem = ({ discount, name, price, image, id }: TProduct) => {
   const [discountPrice, setDiscountPrice] = useState("");
 
   const getDiscountPrice = (price: string, discount: string) => {
@@ -27,9 +28,9 @@ const ProductItem = ({ discount, name, price, image }: TProduct) => {
       {discount && (
         <span className={"product-item__discount"}>-{discount}</span>
       )}
-      <a href="#!" className={"product-item__link"}>
+      <Link to={`/catalog/${id}`} className={"product-item__link"}>
         <img className={"product-item__img"} src={image} alt="img" />
-      </a>
+      </Link>
       <h3 className={"product-item__title"}>{name}</h3>
       <div className={"product-item__prices"}>
         <span className={"product-item__price product-item__price_old"}>

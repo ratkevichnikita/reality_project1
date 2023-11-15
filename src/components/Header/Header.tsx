@@ -1,16 +1,23 @@
 import logo from "../../assets/images/logo.svg";
 import basket from "../../assets/images/basket.svg";
 import "./styles.scss";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
     <div className={"header"}>
       <div className={"container"}>
         <div className={"header__wrapper"}>
-          <img src={logo} alt="logo" />
+          <Link to="/">
+            <img src={logo} alt="logo" />
+          </Link>
           <ul className={"header__list"}>
-            <li className={"header__item header__item_active"}>Главная</li>
-            <li className={"header__item"}>Каталог мебели</li>
+            <li className={"header__item header__item_active"}>
+              <Link to="/">Главная</Link>
+            </li>
+            <li className={"header__item"}>
+              <Link to="/catalog">Каталог мебели</Link>
+            </li>
             <li className={"header__item"}>О компании</li>
             <li className={"header__item"}>Доставка и оплата</li>
             <li className={"header__item"}>Магазины</li>
