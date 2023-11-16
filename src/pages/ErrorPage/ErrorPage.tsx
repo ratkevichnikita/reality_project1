@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import "./styles.scss";
+import { FC } from "react";
 
-const ErrorPage = () => {
+const ErrorPage: FC = () => {
   const navigate = useNavigate();
 
   const goBack = () => {
