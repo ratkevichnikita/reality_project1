@@ -23,7 +23,6 @@ const Slider = ({ slides }: TSliderProps) => {
         modules={[Navigation]}
         spaceBetween={30}
         slidesPerView={4}
-        onSwiper={(swiper) => console.log(swiper)}
       >
         {slides.map((slide: TProduct) => (
           <SwiperSlide key={slide.id}>
