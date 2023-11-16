@@ -1,5 +1,10 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { TApiData } from "./api.types";
+import { TApiData, TCategory, TProduct, TPromo } from "./api.types";
+
+const baseGetQuery = () => ({
+  url: "/",
+  method: "GET",
+});
 
 export const realityApi = createApi({
   reducerPath: "realityApi",
@@ -9,12 +14,26 @@ export const realityApi = createApi({
   }),
   endpoints: (build) => ({
     getData: build.query<TApiData, void>({
-      query: () => ({
-        url: "/",
-        method: "GET",
-      }),
+      query: baseGetQuery,
+    }),
+    getProducts: build.query<TProduct[], void>({
+      query: baseGetQuery,
+      transformResponse: (response: TApiData) => response.products,
+    }),
+    getCategories: build.query<TCategory[], void>({
+      query: baseGetQuery,
+      transformResponse: (response: TApiData) => response.categories,
+    }),
+    getPromo: build.query<TPromo, void>({
+      query: baseGetQuery,
+      transformResponse: (response: TApiData) => response.promo,
     }),
   }),
 });
 
-export const { useGetDataQuery } = realityApi;
+export const {
+  useGetDataQuery,
+  useGetProductsQuery,
+  useGetCategoriesQuery,
+  useGetPromoQuery,
+} = realityApi;

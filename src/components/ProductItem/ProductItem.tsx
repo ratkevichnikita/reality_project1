@@ -28,7 +28,7 @@ const ProductItem = ({ discount, name, price, image, id }: TProduct) => {
       {discount && (
         <span className={"product-item__discount"}>-{discount}</span>
       )}
-      <Link to={`/catalog/${id}`} className={"product-item__link"}>
+      <Link to={`/product/${id}`} className={"product-item__link"}>
         <img className={"product-item__img"} src={image} alt="img" />
       </Link>
       <h3 className={"product-item__title"}>{name}</h3>
