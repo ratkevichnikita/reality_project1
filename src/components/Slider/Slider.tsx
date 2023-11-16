@@ -11,9 +11,10 @@ type TSliderProps = {
 };
 
 const Slider = ({ slides }: TSliderProps) => {
+  const slidesPerView: number = 4;
   return (
     <div className={"slider"}>
-      <SliderNavButtons />
+      {slides.length > slidesPerView && <SliderNavButtons />}
       <Swiper
         navigation={{
           nextEl: ".swiper-button-next",
@@ -22,7 +23,7 @@ const Slider = ({ slides }: TSliderProps) => {
         }}
         modules={[Navigation]}
         spaceBetween={30}
-        slidesPerView={4}
+        slidesPerView={slidesPerView}
       >
         {slides.map((slide: TProduct) => (
           <SwiperSlide key={slide.id}>
