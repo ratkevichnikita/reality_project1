@@ -1,10 +1,13 @@
+import { useEffect, useState } from "react";
+import { useGetProductsQuery } from "../../redux/services/realityApi";
+
+import { TProduct } from "../../redux/services/api.types";
+
 import Header from "../../components/Header/Header";
 import Categories from "../../components/Categories/Categories";
-import "./styles.scss";
 import SpecialProducts from "../../components/SpecialProducts/SpecialProducts";
-import { useGetProductsQuery } from "../../redux/services/realityApi";
-import { useEffect, useState } from "react";
-import { TProduct } from "../../redux/services/api.types";
+import Promo from "../../components/Promo/Promo";
+import "./styles.scss";
 
 const Home = () => {
   const [discountedProducts, setDiscountedProducts] = useState<TProduct[]>([]);
@@ -13,17 +16,15 @@ const Home = () => {
 
   useEffect(() => {
     const discProducts = data?.filter((product) => product.discount);
+    const newProducts = data?.filter((product) => product.isNew);
     if (discProducts?.length) {
       setDiscountedProducts(discProducts);
     }
-  }, [data]);
-
-  useEffect(() => {
-    const newProducts = data?.filter((product) => product.isNew);
     if (newProducts?.length) {
       setNewProducts(newProducts);
     }
   }, [data]);
+
   return (
     <>
       <Header />
@@ -46,7 +47,8 @@ const Home = () => {
           productList={discountedProducts}
         />
       </section>
-      <section>
+      <Promo />
+      <section className={"section"}>
         <SpecialProducts
           title="Новинки"
           text="Если вы ищете, где купить мебель в Чебоксарах, то советуем обратить внимание на продукцию ншей фабрики. Направление нашего производства — мягкая мебель, пользующаяся большим спросом уже более 20-ти лет."
