@@ -1,0 +1,49 @@
+.promo {
+  width: 100%;
+  display: flex;
+  background-image: url(../../assets/images/bg-promo.jpg);
+  background-repeat: no-repeat;
+  background-position: center center;
+
+  &__wrapper {
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 82px;
+    color: var(--accent-text-color);
+  }
+
+  &__description {
+    width: 348px;
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 150%;
+  }
+
+  &__discount {
+    font-size: 40px;
+    font-style: italic;
+    font-weight: 500;
+    line-height: 130%;
+    transform: rotate(-15deg);
+  }
+
+  &__img {
+    padding-top: 12px;
+  }
+
+  &__img-container {
+    position: relative;
+  }
+
+  &__label {
+    position: absolute;
+    top: 55px;
+    left: 85px;
+    color: #ff9292;
+    font-size: 50px;
+    font-style: italic;
+    font-weight: 500;
+    line-height: 100%;
+  }
+}
