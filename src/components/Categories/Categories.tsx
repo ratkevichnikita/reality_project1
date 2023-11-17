@@ -1,17 +1,17 @@
 import "./Categories.scss";
 import Category from "./Category/Category";
-import { useGetDataQuery } from "../../redux/services/realityApi";
+import { useGetCategoriesQuery } from "../../redux/services/realityApi";
 import { TCategory } from "../../redux/services/api.types";
 
 export default function Categories() {
-  const { data } = useGetDataQuery();
+  const { data } = useGetCategoriesQuery();
 
   return (
     <section className="categories">
       <div className="container">
         {data && (
           <ul className="categories__list">
-            {data.categories.map(
+            {data.map(
               (item: TCategory) =>
                 item.count && (
                   <Category

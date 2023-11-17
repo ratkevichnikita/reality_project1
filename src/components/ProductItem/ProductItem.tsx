@@ -4,7 +4,7 @@ import { TProduct } from "../../redux/services/api.types";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const ProductItem = ({ discount, name, price, image, id }: TProduct) => {
+const ProductItem = ({ discount, name, price, image, id, isNew }: TProduct) => {
   const [discountPrice, setDiscountPrice] = useState("");
 
   const getDiscountPrice = (price: string, discount: string) => {
@@ -21,13 +21,16 @@ const ProductItem = ({ discount, name, price, image, id }: TProduct) => {
     if (discount) {
       getDiscountPrice(price, discount);
     }
-  }, [discount]);
+  }, [discount, price]);
 
   return (
     <div className={"product-item"}>
-      {discount && (
-        <span className={"product-item__discount"}>-{discount}</span>
-      )}
+      <div className={"product-item__banner"}>
+        {isNew && <span className={"product-item__new"}>NEW</span>}
+        {discount && (
+          <span className={"product-item__discount"}>-{discount}</span>
+        )}
+      </div>
       <Link to={`/product/${id}`} className={"product-item__link"}>
         <img className={"product-item__img"} src={image} alt="img" />
       </Link>
