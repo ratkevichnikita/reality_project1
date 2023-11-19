@@ -1,17 +1,23 @@
-import "./Categories.scss";
-import Category from "./Category/Category";
 import { useGetCategoriesQuery } from "../../redux/services/realityApi";
+
 import { TCategory } from "../../redux/services/api.types";
 
+import Category from "./Category/Category";
+import Loader from "../Loader/Loader";
+
+import "./Categories.scss";
+
 export default function Categories() {
-  const { data } = useGetCategoriesQuery();
+  const { data, isLoading } = useGetCategoriesQuery();
 
   return (
     <section className="categories">
-      <div className="container">
-        {data && (
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <div className="container">
           <ul className="categories__list">
-            {data.map(
+            {data?.map(
               (item: TCategory) =>
                 item.count && (
                   <Category
@@ -22,8 +28,8 @@ export default function Categories() {
                 ),
             )}
           </ul>
-        )}
-      </div>
+        </div>
+      )}
     </section>
   );
 }
