@@ -26,23 +26,18 @@
 
   &__item {
     max-width: 278px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    text-align: center;
 
     &-title {
       font-size: 25px;
       font-weight: 350;
-      line-height: normal;
       color: var(--accent-text-color);
       margin: 20px 0 7px;
     }
 
     &-text {
       font-size: 14px;
-      font-weight: 400;
       line-height: 170%;
-      text-align: center;
     }
   }
 }
