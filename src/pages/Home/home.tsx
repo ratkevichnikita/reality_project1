@@ -9,6 +9,7 @@ import SpecialProducts from "../../components/SpecialProducts/SpecialProducts";
 import Promo from "../../components/Promo/Promo";
 import "./styles.scss";
 import Info from "../../components/Info/Info";
+import Map from "../../components/Map/Map";
 
 const Home = () => {
   const [discountedProducts, setDiscountedProducts] = useState<TProduct[]>([]);
@@ -57,6 +58,9 @@ const Home = () => {
         />
       </section>
       <Info />
+      <section className={"section"}>
+        <Map />
+      </section>
     </>
   );
 };
