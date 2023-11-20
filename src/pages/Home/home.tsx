@@ -8,6 +8,7 @@ import Categories from "../../components/Categories/Categories";
 import SpecialProducts from "../../components/SpecialProducts/SpecialProducts";
 import Promo from "../../components/Promo/Promo";
 import "./styles.scss";
+import Info from "../../components/Info/Info";
 
 const Home = () => {
   const [discountedProducts, setDiscountedProducts] = useState<TProduct[]>([]);
@@ -55,6 +56,7 @@ const Home = () => {
           productList={newProducts}
         />
       </section>
+      <Info />
     </>
   );
 };
