@@ -10,6 +10,7 @@ import Promo from "../../components/Promo/Promo";
 import "./styles.scss";
 import Info from "../../components/Info/Info";
 import Map from "../../components/Map/Map";
+import AboutCompany from "../../components/AboutCompany/AboutCompany";
 
 const Home = () => {
   const [discountedProducts, setDiscountedProducts] = useState<TProduct[]>([]);
@@ -60,6 +61,9 @@ const Home = () => {
       <Info />
       <section className={"section"}>
         <Map />
+      </section>
+      <section className={"section"}>
+        <AboutCompany />
       </section>
     </>
   );
