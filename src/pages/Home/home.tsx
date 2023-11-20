@@ -9,11 +9,8 @@ import SpecialProducts from "../../components/SpecialProducts/SpecialProducts";
 import Promo from "../../components/Promo/Promo";
 import "./styles.scss";
 import Info from "../../components/Info/Info";
-<<<<<<< Updated upstream
 import Map from "../../components/Map/Map";
-=======
 import AboutCompany from "../../components/AboutCompany/AboutCompany";
->>>>>>> Stashed changes
 
 const Home = () => {
   const [discountedProducts, setDiscountedProducts] = useState<TProduct[]>([]);
@@ -63,11 +60,10 @@ const Home = () => {
       </section>
       <Info />
       <section className={"section"}>
-<<<<<<< Updated upstream
         <Map />
-=======
+      </section>
+      <section className={"section"}>
         <AboutCompany />
->>>>>>> Stashed changes
       </section>
     </>
   );
