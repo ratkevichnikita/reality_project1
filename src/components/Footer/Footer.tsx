@@ -7,23 +7,14 @@ import wpIcon from "../../assets/images/wp.svg";
 import logo from "../../assets/images/logo.svg";
 
 import "./styles.scss";
+import NavBar from "../NavBar/NavBar";
 
 const Footer = () => {
   return (
     <footer className={"footer"}>
       <div className={"container"}>
         <div className={"footer__navigation"}>
-          <ul className={"footer__navigation-list"}>
-            <li className={"footer__navigation-item"}>
-              <Link to="/">Главная</Link>
-            </li>
-            <li className={"footer__navigation-item"}>
-              <Link to="/catalog">Каталог мебели</Link>
-            </li>
-            <li className={"footer__navigation-item"}>О компании</li>
-            <li className={"footer__navigation-item"}>Доставка и оплата</li>
-            <li className={"footer__navigation-item"}>Магазины</li>
-          </ul>
+          <NavBar />
           <div className={"footer__contacts"}>
             <div className={"footer__contacts-wrapper"}>
               <p className={"footer__contacts-title"}>Мы в соцсетях</p>
