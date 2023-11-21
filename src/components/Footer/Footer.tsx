@@ -37,7 +37,9 @@ const Footer = () => {
               </div>
             </div>
             <div className={"footer__contacts-wrapper"}>
-              <h2 className={"footer__contacts-title"}>8 (917) 077-23-32</h2>
+              <a href="tel:+79170772332" className={"footer__contacts-title"}>
+                8 (917) 077-23-32
+              </a>
               <div className={"footer__contacts-icons"}>
                 <a href="#!">
                   <img src={viberIcon} alt="viber icon" />
