@@ -26,7 +26,7 @@ const Footer = () => {
           </ul>
           <div className={"footer__contacts"}>
             <div className={"footer__contacts-wrapper"}>
-              <h2 className={"footer__contacts-title"}>Мы в соцсетях</h2>
+              <p className={"footer__contacts-title"}>Мы в соцсетях</p>
               <div className={"footer__contacts-icons"}>
                 <a href="#!">
                   <img src={vkIcon} alt="vk icon" />
