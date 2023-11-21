@@ -27,7 +27,9 @@ const Header = () => {
               <img className={"basket__img"} src={basket} alt="basket" />
               <span className={"basket__counter"}>0</span>
             </div>
-            <p className={"header__phone"}>8 (917) 077-23-32</p>
+            <a href="tel:+79170772332" className={"header__phone"}>
+              8 (917) 077-23-32
+            </a>
           </div>
         </div>
       </div>

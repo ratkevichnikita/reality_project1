@@ -26,7 +26,7 @@ const Footer = () => {
           </ul>
           <div className={"footer__contacts"}>
             <div className={"footer__contacts-wrapper"}>
-              <h2 className={"footer__contacts-title"}>Мы в соцсетях</h2>
+              <p className={"footer__contacts-title"}>Мы в соцсетях</p>
               <div className={"footer__contacts-icons"}>
                 <a href="#!">
                   <img src={vkIcon} alt="vk icon" />
@@ -37,7 +37,9 @@ const Footer = () => {
               </div>
             </div>
             <div className={"footer__contacts-wrapper"}>
-              <h2 className={"footer__contacts-title"}>8 (917) 077-23-32</h2>
+              <a href="tel:+79170772332" className={"footer__contacts-title"}>
+                8 (917) 077-23-32
+              </a>
               <div className={"footer__contacts-icons"}>
                 <a href="#!">
                   <img src={viberIcon} alt="viber icon" />
