@@ -12,13 +12,24 @@
     line-height: 150%;
     position: relative;
     z-index: 1;
+  }
 
-    &:hover::after {
+  &__link {
+    &_active::before {
       @extend %active-border-nav;
     }
 
-    &_active::after {
+    &::after {
       @extend %active-border-nav;
+      transform-origin: right;
+      transform: scaleX(0);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    &:not(.nav__link_active):hover::after {
+      @extend %active-border-nav;
+      transform-origin: left;
+      transform: scaleX(1);
     }
   }
 }

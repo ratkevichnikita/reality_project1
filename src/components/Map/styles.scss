@@ -12,11 +12,20 @@
     position: relative;
     cursor: pointer;
 
-    &:hover::after {
+    &::after {
       @extend %active-border-map;
+      transform-origin: right;
+      transform: scaleX(0);
+      transition: transform 0.3s ease-in-out;
     }
 
-    &_active::after {
+    &:not(.map__city_active):hover::after {
+      @extend %active-border-map;
+      transform-origin: left;
+      transform: scaleX(1);
+    }
+
+    &_active::before {
       @extend %active-border-map;
     }
   }
