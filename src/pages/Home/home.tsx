@@ -11,6 +11,7 @@ import "./styles.scss";
 import Info from "../../components/Info/Info";
 import Map from "../../components/Map/Map";
 import AboutCompany from "../../components/AboutCompany/AboutCompany";
+import Footer from "../../components/Footer/Footer";
 
 const Home = () => {
   const [discountedProducts, setDiscountedProducts] = useState<TProduct[]>([]);
@@ -65,6 +66,7 @@ const Home = () => {
       <section className={"section"}>
         <AboutCompany />
       </section>
+      <Footer />
     </>
   );
 };
