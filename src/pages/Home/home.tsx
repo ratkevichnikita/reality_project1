@@ -7,11 +7,12 @@ import Header from "../../components/Header/Header";
 import Categories from "../../components/Categories/Categories";
 import SpecialProducts from "../../components/SpecialProducts/SpecialProducts";
 import Promo from "../../components/Promo/Promo";
-import "./styles.scss";
 import Info from "../../components/Info/Info";
 import Map from "../../components/Map/Map";
 import AboutCompany from "../../components/AboutCompany/AboutCompany";
 import Footer from "../../components/Footer/Footer";
+
+import "./styles.scss";
 
 const Home = () => {
   const [discountedProducts, setDiscountedProducts] = useState<TProduct[]>([]);

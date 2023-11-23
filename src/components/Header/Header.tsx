@@ -1,14 +1,21 @@
 import logo from "../../assets/images/logo.svg";
 import basket from "../../assets/images/basket.svg";
 import "./styles.scss";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import NavBar from "../NavBar/NavBar";
 
 const Header = () => {
+  const location = useLocation();
   return (
     <div className={"header"}>
       <div className={"container"}>
-        <div className={"header__wrapper"}>
+        <div
+          className={
+            location.pathname !== "/"
+              ? "header__wrapper header__wrapper_border "
+              : "header__wrapper"
+          }
+        >
           <Link className={"header__logo"} to="/">
             <img src={logo} alt="logo" />
           </Link>
