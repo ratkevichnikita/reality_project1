@@ -16,8 +16,10 @@
     color: var(--main-text-color);
   }
 
-  &__btn_active {
-    color: var(--main-text-color);
+  &__btn {
+    &_active {
+      color: var(--main-text-color);
+    }
   }
 
   &__counter {

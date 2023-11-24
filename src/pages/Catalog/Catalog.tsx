@@ -7,8 +7,40 @@ import ProductList from "../../components/ProductList/ProductList";
 
 import "./styles.scss";
 import Footer from "../../components/Footer/Footer";
+import { useGetProductsQuery } from "../../redux/services/realityApi";
+import { useEffect, useState } from "react";
+import { TProduct } from "../../redux/services/api.types";
 
 const Catalog = () => {
+  const { data, isLoading } = useGetProductsQuery();
+  const [filteredProductList, setFilteredProductList] = useState<TProduct[]>();
+
+  useEffect(() => {
+    if (data) {
+      setFilteredProductList(data);
+    }
+  }, [data]);
+
+  const handleFilterProducts = (filter: string): void => {
+    const filteredProducts = data?.filter(
+      (product: TProduct) => product.category === filter,
+    );
+    if (filteredProducts) setFilteredProductList(filteredProducts);
+  };
+
+  const handleFilterNewProducts = (): void => {
+    const filteredProducts = filteredProductList?.filter(
+      (product: TProduct) => product["isNew"] === true,
+    );
+    setFilteredProductList(filteredProducts);
+  };
+  const handleFilterDiscountProducts = (): void => {
+    const filteredProducts = filteredProductList?.filter(
+      (product: TProduct) => product["discount"] !== null,
+    );
+    setFilteredProductList(filteredProducts);
+  };
+
   return (
     <div>
       <Header />
@@ -24,10 +56,17 @@ const Catalog = () => {
           </ul>
         </nav>
         <section className="catalog__section">
-          <AsideBar />
+          <AsideBar handleFilterProducts={handleFilterProducts} />
           <div className="catalog__section-wrapper">
-            <Sorting />
-            <ProductList />
+            <Sorting
+              productList={filteredProductList}
+              handleFilterNewProducts={handleFilterNewProducts}
+              handleFilterDiscountProducts={handleFilterDiscountProducts}
+            />
+            <ProductList
+              productList={filteredProductList}
+              isLoading={isLoading}
+            />
           </div>
         </section>
       </div>

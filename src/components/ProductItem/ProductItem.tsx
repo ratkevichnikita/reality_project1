@@ -1,10 +1,22 @@
 import "./styles.scss";
 
 import { TProduct } from "../../redux/services/api.types";
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const ProductItem = ({ discount, name, price, image, id, isNew }: TProduct) => {
+export type ProductItemProps = Pick<
+  TProduct,
+  "discount" | "name" | "price" | "image" | "id" | "isNew"
+>;
+
+const ProductItem: FC<ProductItemProps> = ({
+  discount,
+  name,
+  price,
+  image,
+  id,
+  isNew,
+}) => {
   const [discountPrice, setDiscountPrice] = useState("");
 
   const getDiscountPrice = (price: string, discount: string) => {

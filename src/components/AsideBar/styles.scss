@@ -10,4 +10,12 @@
     font-weight: 350;
     line-height: 110%;
   }
+
+  &__item {
+    transition: all 0.3s ease;
+    &:hover {
+      opacity: 0.8;
+      cursor: pointer;
+    }
+  }
 }
