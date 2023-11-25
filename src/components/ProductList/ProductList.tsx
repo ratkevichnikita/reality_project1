@@ -1,49 +1,68 @@
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 
-import { useGetProductsQuery } from "../../redux/services/realityApi";
+import { TProduct } from "../../redux/services/api.types";
 
 import ProductItem from "../ProductItem/ProductItem";
-
-import "./styles.scss";
-import { TProduct } from "../../redux/services/api.types";
 import Loader from "../Loader/Loader";
 
-const ProductList = () => {
-  const { data, isLoading } = useGetProductsQuery();
+import "./styles.scss";
 
+export type ProductListProps = {
+  productList: TProduct[] | undefined;
+  isLoading: boolean;
+};
+
+const ProductList: FC<ProductListProps> = ({ productList, isLoading }) => {
   const [page, setPage] = useState(0);
   const [filterData, setFilterData] = useState<TProduct[]>([]);
-  const n = 3;
-  const pageCount = Math.ceil((data ? data.length : 0) / n);
+  const productDisplayNumber: number = 11;
+  const pageCount = Math.ceil(
+    (productList ? productList.length : 0) / productDisplayNumber,
+  );
 
   useEffect(() => {
-    if (data) {
+    if (productList) {
       setFilterData(
-        data.filter((item, index) => {
-          return index >= page * n && index < (page + 1) * n;
+        productList.filter((_, index) => {
+          return (
+            index >= page * productDisplayNumber &&
+            index < (page + 1) * productDisplayNumber
+          );
         }),
       );
     }
-  }, [page, data]);
+  }, [page, productList]);
   return (
     <div className="product-list">
       {isLoading ? (
         <Loader />
       ) : (
         <>
-          {" "}
           <div className="product-list__wrapper">
-            {filterData?.map((product) => {
-              return (
-                <div key={product.id}>
-                  <ProductItem {...product} />
-                </div>
-              );
-            })}
+            {productList?.length ? (
+              filterData?.map((product: TProduct) => {
+                return (
+                  <div key={product.id}>
+                    <ProductItem
+                      discount={product.discount}
+                      name={product.name}
+                      price={product.price}
+                      image={product.image}
+                      id={product.id}
+                      isNew={product.isNew}
+                    />
+                  </div>
+                );
+              })
+            ) : (
+              <p className="product-list_empty">
+                По данному запросу не было найдено товаров
+              </p>
+            )}
           </div>
           <div className="pagination">
-            {data && pageCount > 1 && (
+            {productList && pageCount > 1 && (
               <ReactPaginate
                 containerClassName={"pagination__container"}
                 pageClassName={"pagination__page-item"}

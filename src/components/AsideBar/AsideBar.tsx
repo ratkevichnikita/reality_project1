@@ -1,14 +1,33 @@
+import { FC } from "react";
+
+import { AsideBarFilter } from "../../assets/types";
+import { asideBarFilters } from "../../assets/constants";
+
 import "./styles.scss";
 
-const AsideBar = () => {
+type AsideBarProps = {
+  handleFilterProducts: (filter: AsideBarFilter) => void;
+};
+
+const AsideBar: FC<AsideBarProps> = ({ handleFilterProducts }) => {
   return (
     <aside className="aside">
       <ul className="aside__list">
-        <li className="aside__item">Угловые диваны</li>
-        <li className="aside__item">П-образные диваны</li>
-        <li className="aside__item">Прямые диваны</li>
-        <li className="aside__item">Кровати</li>
-        <li className="aside__item">Другое</li>
+        {asideBarFilters.map((filter: AsideBarFilter) => {
+          return (
+            <li
+              key={filter.filter}
+              className={
+                filter.isSelected
+                  ? "aside__item aside__item_active"
+                  : "aside__item"
+              }
+              onClick={() => handleFilterProducts(filter)}
+            >
+              {filter.name}
+            </li>
+          );
+        })}
       </ul>
     </aside>
   );

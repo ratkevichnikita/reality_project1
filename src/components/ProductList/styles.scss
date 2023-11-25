@@ -1,8 +1,15 @@
 .product-list {
+  min-height: 100vh;
   &__wrapper {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 60px 30px;
+  }
+
+  &_empty {
+    grid-column: span 3;
+    text-align: center;
+    font-size: 1.5rem;
   }
 }
 
