@@ -1,52 +1,33 @@
 import { FC } from "react";
+
+import { AsideBarFilter } from "../../assets/types";
+import { asideBarFilters } from "../../assets/constants";
+
 import "./styles.scss";
 
-export type AsideBarProps = {
-  handleFilterProducts: (filter: string) => void;
+type AsideBarProps = {
+  handleFilterProducts: (filter: AsideBarFilter) => void;
 };
-
-export enum Filters {
-  cornerSofas = "cornerSofas",
-  straightSofas = "straightSofas",
-  beds = "beds",
-  uShapedSofas = "uShapedSofas",
-  other = "other",
-}
 
 const AsideBar: FC<AsideBarProps> = ({ handleFilterProducts }) => {
   return (
     <aside className="aside">
       <ul className="aside__list">
-        <li
-          className="aside__item"
-          onClick={() => handleFilterProducts(Filters.cornerSofas)}
-        >
-          Угловые диваны
-        </li>
-        <li
-          className="aside__item"
-          onClick={() => handleFilterProducts(Filters.uShapedSofas)}
-        >
-          П-образные диваны
-        </li>
-        <li
-          className="aside__item"
-          onClick={() => handleFilterProducts(Filters.straightSofas)}
-        >
-          Прямые диваны
-        </li>
-        <li
-          className="aside__item"
-          onClick={() => handleFilterProducts(Filters.beds)}
-        >
-          Кровати
-        </li>
-        <li
-          className="aside__item"
-          onClick={() => handleFilterProducts(Filters.other)}
-        >
-          Другое
-        </li>
+        {asideBarFilters.map((filter: AsideBarFilter) => {
+          return (
+            <li
+              key={filter.filter}
+              className={
+                filter.isSelected
+                  ? "aside__item aside__item_active"
+                  : "aside__item"
+              }
+              onClick={() => handleFilterProducts(filter)}
+            >
+              {filter.name}
+            </li>
+          );
+        })}
       </ul>
     </aside>
   );

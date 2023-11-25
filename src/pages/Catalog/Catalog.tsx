@@ -10,6 +10,8 @@ import Footer from "../../components/Footer/Footer";
 import { useGetProductsQuery } from "../../redux/services/realityApi";
 import { useEffect, useState } from "react";
 import { TProduct } from "../../redux/services/api.types";
+import { AsideBarFilter } from "../../assets/types";
+import { asideBarFilters } from "../../assets/constants";
 
 const Catalog = () => {
   const { data, isLoading } = useGetProductsQuery();
@@ -21,11 +23,19 @@ const Catalog = () => {
     }
   }, [data]);
 
-  const handleFilterProducts = (filter: string): void => {
+  const handleFilterProducts = (filter: AsideBarFilter): void => {
     const filteredProducts = data?.filter(
-      (product: TProduct) => product.category === filter,
+      (product: TProduct) => product.category === filter.filter,
     );
     if (filteredProducts) setFilteredProductList(filteredProducts);
+
+    asideBarFilters.forEach((el: AsideBarFilter) => {
+      if (el.filter === filter.filter) {
+        el.isSelected = true;
+      } else {
+        el.isSelected = false;
+      }
+    });
   };
 
   const handleFilterNewProducts = (): void => {

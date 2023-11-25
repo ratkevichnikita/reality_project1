@@ -1,5 +1,7 @@
 import { FC } from "react";
+
 import { TProduct } from "../../redux/services/api.types";
+
 import "./styles.scss";
 
 type SortingProps = {

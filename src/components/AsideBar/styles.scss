@@ -17,5 +17,9 @@
       opacity: 0.8;
       cursor: pointer;
     }
+
+    &_active {
+      color: #6eaeb0;
+    }
   }
 }
