@@ -1,33 +1,41 @@
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+
+import { TProduct } from "../../redux/services/api.types";
+import { AsideBarFilter } from "../../assets/types";
+import { asideBarFilters } from "../../assets/constants";
 
 import Header from "../../components/Header/Header";
 import AsideBar from "../../components/AsideBar/AsideBar";
 import Sorting from "../../components/Sorting/Sorting";
 import ProductList from "../../components/ProductList/ProductList";
+import Footer from "../../components/Footer/Footer";
 
 import "./styles.scss";
-import Footer from "../../components/Footer/Footer";
-import { useGetProductsQuery } from "../../redux/services/realityApi";
-import { useEffect, useState } from "react";
-import { TProduct } from "../../redux/services/api.types";
-import { AsideBarFilter } from "../../assets/types";
-import { asideBarFilters } from "../../assets/constants";
+import { fetchProducts, filterProducts } from "../../redux/productsSlice";
 
 const Catalog = () => {
-  const { data, isLoading } = useGetProductsQuery();
-  const [filteredProductList, setFilteredProductList] = useState<TProduct[]>();
+  const [isQuery, setIsQuery] = useState(false);
+  const dispatch = useAppDispatch();
+  const { products, sortedProducts, isLoading } = useAppSelector(
+    (state) => state.products,
+  );
+  const [filteredProductList, setFilteredProductList] = useState<TProduct[]>(
+    [],
+  );
 
   useEffect(() => {
-    if (data) {
-      setFilteredProductList(data);
-    }
-  }, [data]);
+    dispatch(fetchProducts());
+  }, [dispatch]);
+
+  useEffect(() => {
+    setFilteredProductList(isQuery ? sortedProducts : products);
+  }, [products, sortedProducts, isQuery]);
 
   const handleFilterProducts = (filter: AsideBarFilter): void => {
-    const filteredProducts = data?.filter(
-      (product: TProduct) => product.category === filter.filter,
-    );
-    if (filteredProducts) setFilteredProductList(filteredProducts);
+    setIsQuery(true);
+    dispatch(filterProducts(filter.filter));
 
     asideBarFilters.forEach((el: AsideBarFilter) => {
       if (el.filter === filter.filter) {
