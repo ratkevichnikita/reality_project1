@@ -1,20 +1,35 @@
-import './Categories.scss';
-import Category from '../Category/Category'
-import { useGetDataQuery } from '../../redux/services/realityApi';
+import { useGetCategoriesQuery } from "../../redux/services/realityApi";
+
+import { TCategory } from "../../redux/services/api.types";
+
+import Category from "./Category/Category";
+import Loader from "../Loader/Loader";
+
+import "./Categories.scss";
 
 export default function Categories() {
-    const { data, isLoading } = useGetDataQuery(null);
+  const { data, isLoading } = useGetCategoriesQuery();
 
-    return (
-        <section className='categories'>
-            <div className='container'>
-                { !isLoading && 
-                <ul className='categories__list'>
-                    {data.categories.map((item:any) => (
-                        item.count && <Category key={item.name} image={item.image} label={item.label} />
-                    ))}
-                </ul> }
-            </div>
-        </section>
-    );
-};
+  return (
+    <section className="categories">
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <div className="container">
+          <ul className="categories__list">
+            {data?.map(
+              (item: TCategory) =>
+                item.count && (
+                  <Category
+                    key={item.name}
+                    image={item.image}
+                    label={item.label}
+                  />
+                ),
+            )}
+          </ul>
+        </div>
+      )}
+    </section>
+  );
+}

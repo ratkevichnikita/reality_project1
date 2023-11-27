@@ -1,5 +1,6 @@
 {
   "name": "reality_project1",
+  "homepage": "https://ratkevichnikita.github.io/reality_project1",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -13,10 +14,15 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.7",
     "@types/react-redux": "^7.1.30",
+    "@types/react-router": "^5.1.20",
+    "@types/react-router-dom": "^5.3.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-paginate": "^8.2.0",
     "react-redux": "^8.1.3",
-    "react-router-dom": "^6.18.0"
+    "react-router": "^6.18.0",
+    "react-router-dom": "^6.18.0",
+    "swiper": "^11.0.4"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",
