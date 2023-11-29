@@ -3,8 +3,13 @@ import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 
 import { TProduct } from "../../redux/services/api.types";
-import { AsideBarFilter } from "../../assets/types";
-import { asideBarFilters } from "../../assets/constants";
+import { AsideBarFilter, TSortingFilter } from "../../assets/types";
+import { asideBarFilters, sortingFilters } from "../../assets/constants";
+import {
+  fetchProducts,
+  filterProductsByCategory,
+  filterProductsBySorting,
+} from "../../redux/productsSlice";
 
 import Header from "../../components/Header/Header";
 import AsideBar from "../../components/AsideBar/AsideBar";
@@ -13,7 +18,6 @@ import ProductList from "../../components/ProductList/ProductList";
 import Footer from "../../components/Footer/Footer";
 
 import "./styles.scss";
-import { fetchProducts, filterProducts } from "../../redux/productsSlice";
 
 const Catalog = () => {
   const [isQuery, setIsQuery] = useState(false);
@@ -33,10 +37,14 @@ const Catalog = () => {
     setFilteredProductList(isQuery ? sortedProducts : products);
   }, [products, sortedProducts, isQuery]);
 
-  const handleFilterProducts = (filter: AsideBarFilter): void => {
-    setIsQuery(true);
-    dispatch(filterProducts(filter.filter));
-
+  const handleFilterProductsByCategory = (filter: AsideBarFilter): void => {
+    if (filter.filter === "all") {
+      setIsQuery(false);
+    }
+    if (filter.filter !== "all") {
+      setIsQuery(true);
+    }
+    dispatch(filterProductsByCategory(filter.filter));
     asideBarFilters.forEach((el: AsideBarFilter) => {
       if (el.filter === filter.filter) {
         el.isSelected = true;
@@ -46,17 +54,16 @@ const Catalog = () => {
     });
   };
 
-  const handleFilterNewProducts = (): void => {
-    const filteredProducts = filteredProductList?.filter(
-      (product: TProduct) => product["isNew"] === true,
-    );
-    setFilteredProductList(filteredProducts);
-  };
-  const handleFilterDiscountProducts = (): void => {
-    const filteredProducts = filteredProductList?.filter(
-      (product: TProduct) => product["discount"] !== null,
-    );
-    setFilteredProductList(filteredProducts);
+  const handleFilterProductsBySorting = (filterItem: TSortingFilter): void => {
+    setIsQuery(true);
+    dispatch(filterProductsBySorting(filterItem.filter));
+    sortingFilters.forEach((el: TSortingFilter) => {
+      if (el.filter === filterItem.filter) {
+        el.isSelected = true;
+      } else {
+        el.isSelected = false;
+      }
+    });
   };
 
   return (
@@ -74,12 +81,11 @@ const Catalog = () => {
           </ul>
         </nav>
         <section className="catalog__section">
-          <AsideBar handleFilterProducts={handleFilterProducts} />
+          <AsideBar handleFilterProducts={handleFilterProductsByCategory} />
           <div className="catalog__section-wrapper">
             <Sorting
               productList={filteredProductList}
-              handleFilterNewProducts={handleFilterNewProducts}
-              handleFilterDiscountProducts={handleFilterDiscountProducts}
+              handleFilter={handleFilterProductsBySorting}
             />
             <ProductList
               productList={filteredProductList}

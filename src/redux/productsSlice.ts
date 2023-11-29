@@ -31,15 +31,36 @@ const productsSlice = createSlice({
   name: "products",
   initialState,
   reducers: {
-    filterProducts: (state, action) => {
+    filterProductsByCategory: (state, action) => {
       const res: TProduct[] = [];
 
-      state.products.forEach((value: TProduct) => {
-        if (value.category === action.payload) {
-          res.push(value);
-        }
-      });
-      state.sortedProducts = res;
+      if (action.payload === "all") {
+        state.sortedProducts = res;
+      } else {
+        state.products.forEach((value: TProduct) => {
+          if (value.category === action.payload) {
+            res.push(value);
+          }
+        });
+        state.sortedProducts = res;
+      }
+    },
+    filterProductsBySorting: (state, action) => {
+      switch (action.payload) {
+        case "isNew":
+          state.sortedProducts.length
+            ? (state.sortedProducts = state.sortedProducts.filter(
+                (product) => product.isNew,
+              ))
+            : (state.sortedProducts = state.products.filter(
+                (product) => product.isNew,
+              ));
+          break;
+
+        default:
+          state.sortedProducts = [];
+          break;
+      }
     },
   },
   extraReducers: (builder) => {
@@ -54,6 +75,7 @@ const productsSlice = createSlice({
   },
 });
 
-export const { filterProducts } = productsSlice.actions;
+export const { filterProductsByCategory, filterProductsBySorting } =
+  productsSlice.actions;
 
 export default productsSlice.reducer;

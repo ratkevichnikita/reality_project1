@@ -1,4 +1,4 @@
-import { AsideBarFilter, TCities } from "../types";
+import { AsideBarFilter, TCities, TSortingFilter } from "../types";
 
 export const cities: TCities[] = [
   {
@@ -14,6 +14,11 @@ export const cities: TCities[] = [
 ];
 
 export const asideBarFilters: AsideBarFilter[] = [
+  {
+    filter: "all",
+    isSelected: true,
+    name: "Все товары",
+  },
   {
     filter: "cornerSofas",
     isSelected: false,
@@ -38,5 +43,38 @@ export const asideBarFilters: AsideBarFilter[] = [
     filter: "other",
     isSelected: false,
     name: "Другое",
+  },
+];
+
+export const sortingFilters: TSortingFilter[] = [
+  {
+    filter: "popularity",
+    label: "популярность",
+    isSelected: false,
+    isDisabled: true,
+  },
+  {
+    filter: "isNew",
+    label: "новинки",
+    isSelected: false,
+    isDisabled: false,
+  },
+  {
+    filter: "ascending",
+    label: "цена по возрастанию",
+    isSelected: false,
+    isDisabled: false,
+  },
+  {
+    filter: "descending",
+    label: "цена по убыванию",
+    isSelected: false,
+    isDisabled: false,
+  },
+  {
+    filter: "discount",
+    label: "скидка",
+    isSelected: false,
+    isDisabled: false,
   },
 ];

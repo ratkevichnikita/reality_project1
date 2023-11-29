@@ -9,3 +9,10 @@ export type TCities = {
   isSelected: boolean;
   name: string;
 };
+
+export type TSortingFilter = {
+  filter: string;
+  label: string;
+  isSelected: boolean;
+  isDisabled: boolean;
+};
