@@ -117,8 +117,20 @@ button:active {
   outline: none;
 }
 
+button:disabled {
+  background-color: #f8f8f8;
+  color: #c2c2c2;
+}
+button:disabled:hover {
+  cursor: unset;
+  opacity: unset;
+}
+
 .section {
-  margin: 80px 0;
+  padding: 80px 0;
+}
+.card-section {
+  margin: 60px 0;
 }
 
 .container {

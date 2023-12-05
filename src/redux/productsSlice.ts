@@ -1,16 +1,27 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { TProduct } from "./services/api.types";
+import { TCategories, TColor } from "../assets/types";
+import { getDiscount } from "../utils/helpers";
+import { categories, colorList } from "../assets/constants";
 
 interface ProductState {
   products: TProduct[];
   sortedProducts: TProduct[];
+  catalogProducts: TProduct[];
   isLoading: boolean;
   error: string | null;
+  categories: TCategories[];
+  colorList: TColor[];
+  currentColorList: TColor[];
 }
 
 const initialState: ProductState = {
   products: [],
   sortedProducts: [],
+  catalogProducts: [],
+  categories,
+  colorList,
+  currentColorList: [],
   isLoading: false,
   error: null,
 };
@@ -31,15 +42,72 @@ const productsSlice = createSlice({
   name: "products",
   initialState,
   reducers: {
-    filterProducts: (state, action) => {
-      const res: TProduct[] = [];
+    filterProductsByCategory: (state, action) => {
+      const data: TProduct[] = state.products.filter((value: TProduct) =>
+        action.payload === "all" ? value : value.category === action.payload,
+      );
+      state.catalogProducts = data;
 
-      state.products.forEach((value: TProduct) => {
-        if (value.category === action.payload) {
-          res.push(value);
+      const newCategories: TCategories[] = state.categories.map(
+        (el: TCategories) => {
+          if (el.filter === action.payload) {
+            return { ...el, isSelected: true };
+          } else {
+            return { ...el, isSelected: false };
+          }
+        },
+      );
+      state.categories = newCategories;
+    },
+    filterProductsBySorting: (state, action) => {
+      let data: TProduct[] = [];
+      switch (action.payload) {
+        case "isNew":
+          data = state.products.filter((value: TProduct) => value.isNew);
+          break;
+        case "discount":
+          data = state.products.filter((value: TProduct) => value.discount);
+          break;
+        case "ascending":
+          data = state.products.sort(
+            (a, b) =>
+              getDiscount(b.price, b.discount) -
+              getDiscount(a.price, a.discount),
+          );
+          break;
+        case "descending":
+          data = state.products.sort(
+            (a, b) =>
+              getDiscount(a.price, a.discount) -
+              getDiscount(b.price, b.discount),
+          );
+          break;
+        default:
+          state.sortedProducts = [];
+          break;
+      }
+      state.catalogProducts = data;
+    },
+    getCurrentColorList: (state, action: PayloadAction<string[]>) => {
+      const resColors: TColor[] = [];
+      action.payload.forEach((value: string) => {
+        const color = state.colorList.find((el) => el.engName === value);
+        if (color) {
+          resColors.push(color);
         }
       });
-      state.sortedProducts = res;
+      state.currentColorList = resColors;
+    },
+    changeCurrentColor: (state, action: PayloadAction<string>) => {
+      const newCurrentColorList: TColor[] = state.currentColorList.map((el) => {
+        if (el.engName === action.payload) {
+          return { ...el, isSelected: true };
+        } else {
+          return { ...el, isSelected: false };
+        }
+      });
+
+      state.currentColorList = newCurrentColorList;
     },
   },
   extraReducers: (builder) => {
@@ -50,10 +118,16 @@ const productsSlice = createSlice({
     builder.addCase(fetchProducts.fulfilled, (state, action) => {
       state.isLoading = false;
       state.products = action.payload;
+      state.catalogProducts = action.payload;
     });
   },
 });
 
-export const { filterProducts } = productsSlice.actions;
+export const {
+  filterProductsByCategory,
+  filterProductsBySorting,
+  getCurrentColorList,
+  changeCurrentColor,
+} = productsSlice.actions;
 
 export default productsSlice.reducer;

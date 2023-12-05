@@ -6,15 +6,19 @@ import SliderNavButtons from "./SliderNavButtons/SliderNavButtons";
 import "swiper/css";
 import "./styles.scss";
 
-type TSliderProps = {
+type SliderProps = {
   slides: TProduct[];
+  arrowLeft: string;
+  arrowRight: string;
 };
 
-const Slider = ({ slides }: TSliderProps) => {
+const Slider = ({ slides, arrowRight, arrowLeft }: SliderProps) => {
   const slidesPerView: number = 4;
   return (
     <div className={"slider"}>
-      {slides.length > slidesPerView && <SliderNavButtons />}
+      {slides.length > slidesPerView && (
+        <SliderNavButtons arrowLeft={arrowLeft} arrowRight={arrowRight} />
+      )}
       <Swiper
         navigation={{
           nextEl: ".swiper-button-next",
@@ -23,6 +27,7 @@ const Slider = ({ slides }: TSliderProps) => {
         }}
         modules={[Navigation]}
         spaceBetween={30}
+        loop={true}
         slidesPerView={slidesPerView}
       >
         {slides.map((slide: TProduct) => (

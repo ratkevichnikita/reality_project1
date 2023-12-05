@@ -1,36 +1,37 @@
 import { FC } from "react";
 
-import { TProduct } from "../../redux/services/api.types";
+import { sortingFilters } from "../../assets/constants";
+import { TSortingFilter } from "../../assets/types";
 
 import "./styles.scss";
 
 type SortingProps = {
-  productList: TProduct[] | undefined;
-  handleFilterNewProducts: () => void;
-  handleFilterDiscountProducts: () => void;
+  count: number;
+  handleFilter: (filter: string) => void;
 };
 
-const Sorting: FC<SortingProps> = ({
-  productList,
-  handleFilterNewProducts,
-  handleFilterDiscountProducts,
-}) => {
+const Sorting: FC<SortingProps> = ({ count, handleFilter }) => {
   return (
     <div className="sorting">
       <div className="sorting__wrapper">
         <span className="sorting__text">Сортировка:</span>
-        <button className="sorting__btn sorting__btn_disabled">
-          популярность
-        </button>
-        <button className="sorting__btn" onClick={handleFilterNewProducts}>
-          новинки
-        </button>
-        <button className="sorting__btn">цена по возрастанию</button>
-        <button className="sorting__btn">цена по убыванию</button>
-        <button className="sorting__btn" onClick={handleFilterDiscountProducts}>
-          скидка
-        </button>
-        <span className="sorting__counter">Найдено: {productList?.length}</span>
+        {sortingFilters.map((filter: TSortingFilter) => {
+          return (
+            <button
+              key={filter.label}
+              className={
+                filter.isSelected
+                  ? "sorting__btn sorting__btn_active"
+                  : "sorting__btn"
+              }
+              onClick={() => handleFilter(filter.filter)}
+              disabled={filter.isDisabled}
+            >
+              {filter.label}
+            </button>
+          );
+        })}
+        <span className="sorting__counter">Найдено: {count}</span>
       </div>
     </div>
   );

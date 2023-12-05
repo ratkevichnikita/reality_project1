@@ -1,8 +1,9 @@
 import "./styles.scss";
 
 import { TProduct } from "../../redux/services/api.types";
-import { FC, useEffect, useState } from "react";
+import { FC } from "react";
 import { Link } from "react-router-dom";
+import { getDiscountPrice } from "../../utils/helpers";
 
 export type ProductItemProps = Pick<
   TProduct,
@@ -17,23 +18,7 @@ const ProductItem: FC<ProductItemProps> = ({
   id,
   isNew,
 }) => {
-  const [discountPrice, setDiscountPrice] = useState("");
-
-  const getDiscountPrice = (price: string, discount: string) => {
-    const numPrice = parseInt(price.replace(" ", ""));
-    const numDiscount = parseInt(discount) / 100;
-
-    const discountPrice =
-      (numPrice - numPrice * numDiscount).toLocaleString("ru") + " ₽";
-
-    setDiscountPrice(discountPrice);
-  };
-
-  useEffect(() => {
-    if (discount) {
-      getDiscountPrice(price, discount);
-    }
-  }, [discount, price]);
+  const discountPrice = getDiscountPrice(price, discount);
 
   return (
     <div className={"product-item"}>
@@ -43,7 +28,7 @@ const ProductItem: FC<ProductItemProps> = ({
           <span className={"product-item__discount"}>-{discount}</span>
         )}
       </div>
-      <Link to={`/product/${id}`} className={"product-item__link"}>
+      <Link to={`/catalog/${id}`} className={"product-item__link"}>
         <img className={"product-item__img"} src={image} alt="img" />
       </Link>
       <h3 className={"product-item__title"}>{name}</h3>
