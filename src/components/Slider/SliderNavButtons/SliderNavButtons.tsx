@@ -1,11 +1,17 @@
 import { useSwiper } from "swiper/react";
 
-import arrowRight from "../../../assets/images/arrow-right.svg";
-import arrowLeft from "../../../assets/images/arrow-left.svg";
-
 import "./styles.scss";
+import { FC } from "react";
 
-const SliderNavButtons = () => {
+type SliderNavButtonsProps = {
+  arrowRight: string;
+  arrowLeft: string;
+};
+
+const SliderNavButtons: FC<SliderNavButtonsProps> = ({
+  arrowRight,
+  arrowLeft,
+}) => {
   const swiper = useSwiper();
   return (
     <div className={"swiper-buttons"}>

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useGetProductsQuery } from "../../redux/services/realityApi";
 
 import { TProduct } from "../../redux/services/api.types";
 
@@ -13,22 +12,28 @@ import AboutCompany from "../../components/AboutCompany/AboutCompany";
 import Footer from "../../components/Footer/Footer";
 
 import "./styles.scss";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { fetchProducts } from "../../redux/productsSlice";
 
 const Home = () => {
+  const dispatch = useAppDispatch();
+  const { products } = useAppSelector((state) => state.products);
   const [discountedProducts, setDiscountedProducts] = useState<TProduct[]>([]);
   const [newProducts, setNewProducts] = useState<TProduct[]>([]);
-  const { data } = useGetProductsQuery();
+  useEffect(() => {
+    if (!products.length) dispatch(fetchProducts());
+  }, [dispatch, products]);
 
   useEffect(() => {
-    const discProducts = data?.filter((product) => product.discount);
-    const newProducts = data?.filter((product) => product.isNew);
+    const discProducts = products?.filter((product) => product.discount);
+    const newProducts = products?.filter((product) => product.isNew);
     if (discProducts?.length) {
       setDiscountedProducts(discProducts);
     }
     if (newProducts?.length) {
       setNewProducts(newProducts);
     }
-  }, [data]);
+  }, [products]);
 
   return (
     <>

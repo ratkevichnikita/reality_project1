@@ -1,0 +1,128 @@
+.card-params {
+  background-color: #f7f9f9;
+  padding: 40px 0;
+
+  &__wrapper {
+    display: flex;
+    gap: 35px;
+  }
+}
+
+.demo {
+  width: 58%;
+  &__img {
+    padding: 52px 0;
+    width: 100%;
+  }
+}
+.options {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 20px;
+  color: var(--main-text-color);
+
+  &__title {
+    color: var(--accent-text-color);
+    font-size: 35px;
+    font-weight: 350;
+    line-height: 150%;
+  }
+
+  &__prices {
+    font-size: 35px;
+    line-height: 150%;
+    display: flex;
+    gap: 25px;
+  }
+
+  &__price {
+    &_old {
+      font-size: 25px;
+      text-decoration: line-through;
+    }
+  }
+
+  &__params {
+    &-container {
+      display: flex;
+      gap: 30px;
+      padding-top: 7px;
+    }
+
+    &-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &-text {
+      color: #8d8d8d;
+
+      font-size: 12px;
+      line-height: 170%;
+    }
+
+    &-num {
+      font-size: 14px;
+      line-height: 170%;
+    }
+  }
+
+  &__layout {
+    display: flex;
+    gap: 10px;
+    font-size: 14px;
+    line-height: 170%;
+
+    &-title {
+      font-size: 16px;
+    }
+  }
+
+  &__btn {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 150%;
+    background-color: var(--accent-text-color);
+    width: 100%;
+    padding: 10px 0;
+  }
+}
+
+.color-list {
+  display: flex;
+  gap: 10px;
+  padding-top: 9px;
+
+  color: #8d8d8d;
+
+  font-size: 12px;
+  line-height: 150%;
+
+  &__item {
+    min-width: 66px;
+  }
+
+  &__box {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    position: relative;
+
+    &_active::after {
+      content: "";
+      position: absolute;
+      width: 34px;
+      height: 34px;
+      left: -2px;
+      top: -2px;
+      border: 1px solid #e3e3e3;
+    }
+  }
+}
+
+.title {
+  font-size: 16px;
+  line-height: 170%;
+}

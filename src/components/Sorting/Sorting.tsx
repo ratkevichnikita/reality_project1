@@ -1,17 +1,16 @@
 import { FC } from "react";
 
-import { TProduct } from "../../redux/services/api.types";
 import { sortingFilters } from "../../assets/constants";
 import { TSortingFilter } from "../../assets/types";
 
 import "./styles.scss";
 
 type SortingProps = {
-  productList: TProduct[] | undefined;
-  handleFilter: (filterItem: TSortingFilter) => void;
+  count: number;
+  handleFilter: (filter: string) => void;
 };
 
-const Sorting: FC<SortingProps> = ({ productList, handleFilter }) => {
+const Sorting: FC<SortingProps> = ({ count, handleFilter }) => {
   return (
     <div className="sorting">
       <div className="sorting__wrapper">
@@ -25,14 +24,14 @@ const Sorting: FC<SortingProps> = ({ productList, handleFilter }) => {
                   ? "sorting__btn sorting__btn_active"
                   : "sorting__btn"
               }
-              onClick={() => handleFilter(filter)}
+              onClick={() => handleFilter(filter.filter)}
               disabled={filter.isDisabled}
             >
               {filter.label}
             </button>
           );
         })}
-        <span className="sorting__counter">Найдено: {productList?.length}</span>
+        <span className="sorting__counter">Найдено: {count}</span>
       </div>
     </div>
   );

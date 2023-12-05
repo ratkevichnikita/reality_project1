@@ -3,8 +3,7 @@ import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 
 import { TProduct } from "../../redux/services/api.types";
-import { AsideBarFilter, TSortingFilter } from "../../assets/types";
-import { asideBarFilters, sortingFilters } from "../../assets/constants";
+import { TCategories } from "../../assets/types";
 import {
   fetchProducts,
   filterProductsByCategory,
@@ -20,9 +19,8 @@ import Footer from "../../components/Footer/Footer";
 import "./styles.scss";
 
 const Catalog = () => {
-  const [isQuery, setIsQuery] = useState(false);
   const dispatch = useAppDispatch();
-  const { products, sortedProducts, isLoading } = useAppSelector(
+  const { products, catalogProducts, categories, isLoading } = useAppSelector(
     (state) => state.products,
   );
   const [filteredProductList, setFilteredProductList] = useState<TProduct[]>(
@@ -30,40 +28,22 @@ const Catalog = () => {
   );
 
   useEffect(() => {
-    dispatch(fetchProducts());
-  }, [dispatch]);
+    if (!products.length) {
+      dispatch(fetchProducts());
+    }
+    setFilteredProductList(catalogProducts);
+  }, [dispatch, products, catalogProducts]);
 
   useEffect(() => {
-    setFilteredProductList(isQuery ? sortedProducts : products);
-  }, [products, sortedProducts, isQuery]);
+    dispatch(filterProductsByCategory("all"));
+  }, [dispatch]);
 
-  const handleFilterProductsByCategory = (filter: AsideBarFilter): void => {
-    if (filter.filter === "all") {
-      setIsQuery(false);
-    }
-    if (filter.filter !== "all") {
-      setIsQuery(true);
-    }
+  const handleFilterProductsByCategory = (filter: TCategories): void => {
     dispatch(filterProductsByCategory(filter.filter));
-    asideBarFilters.forEach((el: AsideBarFilter) => {
-      if (el.filter === filter.filter) {
-        el.isSelected = true;
-      } else {
-        el.isSelected = false;
-      }
-    });
   };
 
-  const handleFilterProductsBySorting = (filterItem: TSortingFilter): void => {
-    setIsQuery(true);
-    dispatch(filterProductsBySorting(filterItem.filter));
-    sortingFilters.forEach((el: TSortingFilter) => {
-      if (el.filter === filterItem.filter) {
-        el.isSelected = true;
-      } else {
-        el.isSelected = false;
-      }
-    });
+  const handleFilterProductsBySorting = (filter: string): void => {
+    dispatch(filterProductsBySorting(filter));
   };
 
   return (
@@ -81,10 +61,13 @@ const Catalog = () => {
           </ul>
         </nav>
         <section className="catalog__section">
-          <AsideBar handleFilterProducts={handleFilterProductsByCategory} />
+          <AsideBar
+            handleFilterProducts={handleFilterProductsByCategory}
+            categories={categories}
+          />
           <div className="catalog__section-wrapper">
             <Sorting
-              productList={filteredProductList}
+              count={filteredProductList.length}
               handleFilter={handleFilterProductsBySorting}
             />
             <ProductList

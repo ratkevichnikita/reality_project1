@@ -1,19 +1,19 @@
 import { FC } from "react";
 
 import { AsideBarFilter } from "../../assets/types";
-import { asideBarFilters } from "../../assets/constants";
 
 import "./styles.scss";
 
 type AsideBarProps = {
   handleFilterProducts: (filter: AsideBarFilter) => void;
+  categories: AsideBarFilter[];
 };
 
-const AsideBar: FC<AsideBarProps> = ({ handleFilterProducts }) => {
+const AsideBar: FC<AsideBarProps> = ({ handleFilterProducts, categories }) => {
   return (
     <aside className="aside">
       <ul className="aside__list">
-        {asideBarFilters.map((filter: AsideBarFilter) => {
+        {categories.map((filter: AsideBarFilter) => {
           return (
             <li
               key={filter.filter}
