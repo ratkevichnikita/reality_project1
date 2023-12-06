@@ -3,20 +3,29 @@ import { Link, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 
 import { TProduct } from "../../redux/services/api.types";
-import { fetchProducts } from "../../redux/productsSlice";
+import {
+  fetchProducts,
+  filterProductsBySimilar,
+} from "../../redux/productsSlice";
 import { getDiscountPrice } from "../../utils/helpers";
 
 import Header from "../../components/Header/Header";
 import Loader from "../../components/Loader/Loader";
 import CardParams from "../../components/CardParams/CardParams";
+import CardVideo from "../../components/CardVideo/CardVideo";
+import CardDescription from "../../components/CardDescription/CardDescription";
 
 import "./styles.scss";
+import SpecialProducts from "../../components/SpecialProducts/SpecialProducts";
+import Footer from "../../components/Footer/Footer";
 
 const PersonalCard = () => {
   const { id } = useParams();
   const dispatch = useAppDispatch();
   const [product, setProduct] = useState<TProduct | null>(null);
-  const { products } = useAppSelector((store) => store.products);
+  const { products, similarProducts } = useAppSelector(
+    (store) => store.products,
+  );
   const [discountPrice, setDiscountPrice] = useState<string | null>(null);
 
   useEffect(() => {
@@ -25,7 +34,10 @@ const PersonalCard = () => {
     }
     const currentProduct = products?.find((el: TProduct) => el.id === id);
     if (currentProduct) setProduct(currentProduct);
-  }, [id, products, dispatch]);
+    if (product) {
+      dispatch(filterProductsBySimilar(product));
+    }
+  }, [id, products, dispatch, product]);
 
   useEffect(() => {
     if (product?.discount) {
@@ -68,6 +80,24 @@ const PersonalCard = () => {
             sleepingLength={product.sleepingPlace.length}
             sleepingWidth={product.sleepingPlace.width}
           />
+          <section className="card-section">
+            <CardDescription characteristics={product.characteristics} />
+          </section>
+          <CardVideo
+            link={product.videoLink}
+            title={product.name}
+            text={product.videoText}
+          />
+          {!!similarProducts.length && (
+            <section className="section">
+              <SpecialProducts
+                title="Похожие товары"
+                text="Все представленные диваны цены имеют доступные, тем не менее, наша фабрика регулярно проводит распродажи и акции. Следите за новостями на нашем сайте мебели, если хотите купить диван по выгодной цене."
+                productList={similarProducts}
+              />
+            </section>
+          )}
+          <Footer />
         </>
       )}
     </div>

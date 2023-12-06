@@ -8,6 +8,7 @@ interface ProductState {
   products: TProduct[];
   sortedProducts: TProduct[];
   catalogProducts: TProduct[];
+  similarProducts: TProduct[];
   isLoading: boolean;
   error: string | null;
   categories: TCategories[];
@@ -19,6 +20,7 @@ const initialState: ProductState = {
   products: [],
   sortedProducts: [],
   catalogProducts: [],
+  similarProducts: [],
   categories,
   colorList,
   currentColorList: [],
@@ -88,6 +90,14 @@ const productsSlice = createSlice({
       }
       state.catalogProducts = data;
     },
+    filterProductsBySimilar: (state, action: PayloadAction<TProduct>) => {
+      const data: TProduct[] = state.products.filter(
+        (value: TProduct) =>
+          value.category === action.payload.category &&
+          value.name !== action.payload.name,
+      );
+      state.similarProducts = data;
+    },
     getCurrentColorList: (state, action: PayloadAction<string[]>) => {
       const resColors: TColor[] = [];
       action.payload.forEach((value: string) => {
@@ -128,6 +138,7 @@ export const {
   filterProductsBySorting,
   getCurrentColorList,
   changeCurrentColor,
+  filterProductsBySimilar,
 } = productsSlice.actions;
 
 export default productsSlice.reducer;
