@@ -16,17 +16,15 @@ const Products: FC<ProductsProps> = ({ title, text, productList }) => {
   return (
     <div className={"products"}>
       <div className={"container"}>
-        {productList.length ? (
+        {productList ? (
           <>
             <h2 className={"products__title"}>{title}</h2>
             <p className={"products__text"}>{text}</p>
-            {productList && (
-              <Slider
-                slides={productList}
-                arrowRight={arrowRight}
-                arrowLeft={arrowLeft}
-              />
-            )}
+            <Slider
+              slides={productList}
+              arrowRight={arrowRight}
+              arrowLeft={arrowLeft}
+            />
           </>
         ) : (
           <Loader />

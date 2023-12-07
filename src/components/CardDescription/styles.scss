@@ -1,0 +1,60 @@
+.card-description {
+  display: flex;
+  gap: 35px;
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  &__desc {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 695px;
+  }
+
+  &__title {
+    font-size: 20px;
+    line-height: 150%;
+  }
+
+  &__text {
+    font-size: 14px;
+    line-height: 150%;
+  }
+
+  &__characteristics {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    &-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+
+  &__equipment {
+    &-wrapper {
+      background-color: #f7f9f9;
+      padding: 30px;
+    }
+
+    &-list {
+      font-size: 14px;
+      line-height: 150%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    &-text {
+      font-size: 12px;
+      line-height: 150%;
+      margin: 10px 0 30px;
+    }
+  }
+}
