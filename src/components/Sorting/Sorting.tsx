@@ -1,9 +1,9 @@
 import { FC } from "react";
 
-import { sortingFilters } from "../../assets/constants";
 import { TSortingFilter } from "../../assets/types";
 
 import "./styles.scss";
+import { useAppSelector } from "../../redux/hooks";
 
 type SortingProps = {
   count: number;
@@ -11,6 +11,7 @@ type SortingProps = {
 };
 
 const Sorting: FC<SortingProps> = ({ count, handleFilter }) => {
+  const { sortingFilters } = useAppSelector((store) => store.products);
   return (
     <div className="sorting">
       <div className="sorting__wrapper">
