@@ -8,18 +8,19 @@
     grid-template-columns: 150px 1fr 170px 100px 100px 50px;
     grid-gap: 20px;
     background-color: #f7f9f9;
-    padding: 27px;
+    padding: 27px 0 26px;
     text-align: center;
   }
 
   &__product {
     display: grid;
     grid-template-columns: 150px 1fr 150px 100px 100px 50px;
+    align-items: center;
     grid-gap: 20px;
     text-align: center;
-    align-items: center;
-    padding: 20px 40px;
+    padding: 20px 0;
     border-bottom: 1px solid #e3e3e3;
+    line-height: 170%;
 
     &-name {
       display: block;
@@ -33,16 +34,12 @@
     &-discount {
       font-size: 20px;
     }
-
-    &-btn {
-      margin-left: auto;
-    }
   }
 
   &__info {
     display: flex;
     justify-content: space-between;
-    margin: 30px 80px;
+    margin: 30px 0 80px;
 
     &-input {
       margin-top: 20px;
@@ -68,18 +65,29 @@
   }
 
   &__price {
+    display: flex;
+    justify-content: space-between;
     border-bottom: 1px solid #e3e3e3;
     padding: 0 40px 20px;
+    line-height: 150%;
 
     &-text {
       font-size: 16px;
       font-weight: 700;
-      line-height: 150%;
     }
 
     &-discount {
       font-size: 16px;
-      line-height: 150%;
     }
+  }
+
+  &__send-btn {
+    color: #fff;
+    font-size: 16px;
+    line-height: 150%;
+    background-color: var(--accent-text-color);
+    width: 234px;
+    height: 56px;
+    align-self: flex-end;
   }
 }
