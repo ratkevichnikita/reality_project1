@@ -1,48 +1,37 @@
 .basket-page {
   &__title {
     font-size: 30px;
-    line-height: 150%;
     padding-bottom: 20px;
   }
   &__headers {
+    display: grid;
+    grid-template-columns: 150px 1fr 170px 100px 100px 50px;
+    grid-gap: 20px;
     background-color: #f7f9f9;
-    padding: 27px 163px 26px 98px;
-
-    &-product {
-      padding: 0 236px 0 278px;
-    }
-    &-quantity {
-      padding: 0 102px 0 106px;
-    }
+    padding: 27px;
+    text-align: center;
   }
 
   &__product {
-    display: flex;
+    display: grid;
+    grid-template-columns: 150px 1fr 150px 100px 100px 50px;
+    grid-gap: 20px;
+    text-align: center;
     align-items: center;
     padding: 20px 40px;
     border-bottom: 1px solid #e3e3e3;
 
-    &-image {
-      width: 150px;
-    }
-
     &-name {
       display: block;
       font-size: 14px;
-      line-height: 170%;
-      width: 292px;
-      margin: 0 90px 0 88px;
     }
 
     &-price {
       font-size: 18px;
-      line-height: 170%;
     }
 
     &-discount {
-      margin: 0 90px;
       font-size: 20px;
-      line-height: 170%;
     }
 
     &-btn {
