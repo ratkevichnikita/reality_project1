@@ -2,6 +2,7 @@ import { FC, useEffect } from "react";
 
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
+  addToFavorites,
   changeCurrentColor,
   getCurrentColorList,
 } from "../../redux/productsSlice";
@@ -9,6 +10,7 @@ import {
 import "./styles.scss";
 
 type CardParamsProps = {
+  id: string;
   image: string;
   name: string;
   rowPrice: string;
@@ -21,6 +23,7 @@ type CardParamsProps = {
 };
 
 const CardParams: FC<CardParamsProps> = ({
+  id,
   image,
   name,
   rowPrice,
@@ -121,7 +124,12 @@ const CardParams: FC<CardParamsProps> = ({
               <span className="options__layout-title">Механизм раскладки:</span>
               <span className="options__layout-text">Тройной раскладки</span>
             </div>
-            <button className="options__btn">В корзину</button>
+            <button
+              className="options__btn"
+              onClick={() => dispatch(addToFavorites(id))}
+            >
+              В корзину
+            </button>
           </div>
         </div>
       </div>

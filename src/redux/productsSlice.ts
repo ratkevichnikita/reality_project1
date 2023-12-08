@@ -1,19 +1,21 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { TProduct } from "./services/api.types";
-import { TCategories, TColor } from "../assets/types";
+import { TCategories, TColor, TSortingFilter } from "../assets/types";
 import { getDiscount } from "../utils/helpers";
-import { categories, colorList } from "../assets/constants";
+import { categories, colorList, sortingFilters } from "../assets/constants";
 
 interface ProductState {
   products: TProduct[];
   sortedProducts: TProduct[];
   catalogProducts: TProduct[];
   similarProducts: TProduct[];
+  favoritesProducts: TProduct[];
+  currentColorList: TColor[];
+  categories: TCategories[];
+  sortingFilters: TSortingFilter[];
+  colorList: TColor[];
   isLoading: boolean;
   error: string | null;
-  categories: TCategories[];
-  colorList: TColor[];
-  currentColorList: TColor[];
 }
 
 const initialState: ProductState = {
@@ -21,9 +23,11 @@ const initialState: ProductState = {
   sortedProducts: [],
   catalogProducts: [],
   similarProducts: [],
+  favoritesProducts: [],
+  currentColorList: [],
+  sortingFilters,
   categories,
   colorList,
-  currentColorList: [],
   isLoading: false,
   error: null,
 };
@@ -89,6 +93,16 @@ const productsSlice = createSlice({
           break;
       }
       state.catalogProducts = data;
+      const newSortingFilters: TSortingFilter[] = state.sortingFilters.map(
+        (el: TSortingFilter) => {
+          if (el.filter === action.payload) {
+            return { ...el, isSelected: true };
+          } else {
+            return { ...el, isSelected: false };
+          }
+        },
+      );
+      state.sortingFilters = newSortingFilters;
     },
     filterProductsBySimilar: (state, action: PayloadAction<TProduct>) => {
       const data: TProduct[] = state.products.filter(
@@ -119,6 +133,18 @@ const productsSlice = createSlice({
 
       state.currentColorList = newCurrentColorList;
     },
+    addToFavorites: (state, action: PayloadAction<string>) => {
+      const favoriteProduct = state.products.find(
+        (el) => el.id === action.payload,
+      );
+      if (favoriteProduct) state.favoritesProducts.push(favoriteProduct);
+    },
+    removeFromFavorites: (state, action: PayloadAction<string>) => {
+      const newFavoriteProducts = state.favoritesProducts.filter(
+        (el) => el.id !== action.payload,
+      );
+      state.favoritesProducts = newFavoriteProducts;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchProducts.pending, (state) => {
@@ -139,6 +165,8 @@ export const {
   getCurrentColorList,
   changeCurrentColor,
   filterProductsBySimilar,
+  addToFavorites,
+  removeFromFavorites,
 } = productsSlice.actions;
 
 export default productsSlice.reducer;

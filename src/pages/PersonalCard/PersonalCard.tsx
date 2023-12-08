@@ -70,6 +70,7 @@ const PersonalCard = () => {
             </nav>
           </div>
           <CardParams
+            id={product.id}
             image={product.image}
             name={product.name}
             discountPrice={discountPrice}
