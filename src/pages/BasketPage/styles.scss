@@ -1,16 +1,15 @@
 .basket-page {
   &__title {
     font-size: 30px;
-    line-height: 150%;
     padding-bottom: 20px;
   }
   &__headers {
-    background-color: #f7f9f9;
-    padding: 27px 0 26px;
     display: grid;
     grid-template-columns: 150px 1fr 170px 100px 100px 50px;
-    text-align: center;
     grid-gap: 20px;
+    background-color: #f7f9f9;
+    padding: 27px 0 26px;
+    text-align: center;
   }
 
   &__product {
