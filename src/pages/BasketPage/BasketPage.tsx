@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { getDiscountPrice } from "../../utils/helpers";
+import { removeFromFavorites } from "../../redux/productsSlice";
 import { TProduct } from "../../redux/services/api.types";
+
+import { calculateTotalPrices, getDiscountPrice } from "../../utils/helpers";
 
 import Header from "../../components/Header/Header";
 import Loader from "../../components/Loader/Loader";
@@ -10,11 +12,12 @@ import Loader from "../../components/Loader/Loader";
 import closeBtn from "../../assets/images/close.svg";
 
 import "./styles.scss";
-import { removeFromFavorites } from "../../redux/productsSlice";
 
 const BasketPage = () => {
   const dispatch = useAppDispatch();
   const { favoritesProducts } = useAppSelector((state) => state.products);
+  const [totalRawPrice, totalDiscountNumber, totalDiscountPrice] =
+    calculateTotalPrices(favoritesProducts);
   return (
     <div className="basket-page">
       <Header />
@@ -81,19 +84,21 @@ const BasketPage = () => {
               <div className="basket-page__prices">
                 <div className="basket-page__price">
                   <span className="basket-page__price-text">Сумма</span>
-                  <span></span>
+                  <span>{totalRawPrice}</span>
                 </div>
                 <div className="basket-page__price">
                   <span className="basket-page__price-discount">Скидка</span>
-                  <span></span>
+                  <span>{totalDiscountNumber}</span>
                 </div>
                 <div className="basket-page__price">
                   <span className="basket-page__price-text">
                     Итого к оплате:
                   </span>
-                  <span></span>
+                  <span>{totalDiscountPrice}</span>
                 </div>
-                <button>Отправить заявку</button>
+                <button className="basket-page__send-btn">
+                  Отправить заявку
+                </button>
               </div>
             </div>
           </div>
