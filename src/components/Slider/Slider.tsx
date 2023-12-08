@@ -1,7 +1,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import { TProduct } from "../../redux/services/api.types";
-import ProductItem from "../ProductItem/ProductItem";
+import ProductItem from "../ProductList/ProductItem/ProductItem";
 import SliderNavButtons from "./SliderNavButtons/SliderNavButtons";
 import "swiper/css";
 import "./styles.scss";

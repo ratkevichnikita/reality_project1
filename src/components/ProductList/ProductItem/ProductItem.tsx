@@ -1,11 +1,11 @@
 import "./styles.scss";
 
-import { TProduct } from "../../redux/services/api.types";
+import { TProduct } from "../../../redux/services/api.types";
 import { FC } from "react";
 import { Link } from "react-router-dom";
-import { getDiscountPrice } from "../../utils/helpers";
-import { useAppDispatch } from "../../redux/hooks";
-import { addToFavorites } from "../../redux/productsSlice";
+import { getDiscountPrice } from "../../../utils/helpers";
+import { useAppDispatch } from "../../../redux/hooks";
+import { addToFavorites } from "../../../redux/productsSlice";
 
 export type ProductItemProps = Pick<
   TProduct,

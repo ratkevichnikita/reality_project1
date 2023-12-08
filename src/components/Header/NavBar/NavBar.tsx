@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import "./sryles.scss";
+import "./styles.scss";
 
 const NavBar = () => {
   const location = useLocation();

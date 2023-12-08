@@ -1,11 +1,11 @@
 import { FC, useEffect, useState } from "react";
 
-import bin from "../../assets/images/bin.svg";
+import bin from "../../../assets/images/bin.svg";
 
 import "./styles.scss";
-import { getDiscountPrice } from "../../utils/helpers";
-import { useAppDispatch } from "../../redux/hooks";
-import { removeFromFavorites } from "../../redux/productsSlice";
+import { getDiscountPrice } from "../../../utils/helpers";
+import { useAppDispatch } from "../../../redux/hooks";
+import { removeFromFavorites } from "../../../redux/productsSlice";
 
 type BasketPopupItemProps = {
   id: string;

@@ -5,7 +5,7 @@ import { useAppSelector } from "../../redux/hooks";
 import { TProduct } from "../../redux/services/api.types";
 import { getDiscount, getDiscountPrice } from "../../utils/helpers";
 
-import BasketPopupItem from "../BasketPopupItem/BasketPopupItem";
+import BasketPopupItem from "./BasketPopupItem/BasketPopupItem";
 
 import "./styles.scss";
 
@@ -47,13 +47,12 @@ const BasketPopup: FC<BasketPopupProps> = ({
         <h3 className="basket-popup__title">
           Корзина
           <span className="basket-popup__count">
-            {" "}
-            / {favoritesProducts.length} шт.
+            {` / ${favoritesProducts.length} шт.`}
           </span>
         </h3>
         <ul className="basket-popup__list">
           {favoritesProducts.length ? (
-            favoritesProducts?.map((product) => {
+            favoritesProducts.map((product) => {
               return (
                 <BasketPopupItem
                   id={product.id}

@@ -5,7 +5,7 @@ import { TCategory } from "../../redux/services/api.types";
 import Category from "./Category/Category";
 import Loader from "../Loader/Loader";
 
-import "./Categories.scss";
+import "./styles.scss";
 
 export default function Categories() {
   const { data, isLoading } = useGetCategoriesQuery();

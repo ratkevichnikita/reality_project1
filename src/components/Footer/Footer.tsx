@@ -7,7 +7,7 @@ import wpIcon from "../../assets/images/wp.svg";
 import logo from "../../assets/images/logo.svg";
 
 import "./styles.scss";
-import NavBar from "../NavBar/NavBar";
+import NavBar from "../Header/NavBar/NavBar";
 
 const Footer = () => {
   return (
