@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 
 import { useAppSelector } from "../../redux/hooks";
 
-import NavBar from "../NavBar/NavBar";
+import NavBar from "./NavBar/NavBar";
 import BasketPopup from "../BasketPopup/BasketPopup";
 
 import basket from "../../assets/images/basket.svg";

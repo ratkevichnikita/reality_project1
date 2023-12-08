@@ -1,11 +1,11 @@
 import { FC, useEffect } from "react";
 
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import {
   addToFavorites,
   changeCurrentColor,
   getCurrentColorList,
-} from "../../redux/productsSlice";
+} from "../../../redux/productsSlice";
 
 import "./styles.scss";
 

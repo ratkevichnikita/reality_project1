@@ -3,7 +3,7 @@ import ReactPaginate from "react-paginate";
 
 import { TProduct } from "../../redux/services/api.types";
 
-import ProductItem from "../ProductItem/ProductItem";
+import ProductItem from "./ProductItem/ProductItem";
 import Loader from "../Loader/Loader";
 
 import "./styles.scss";
