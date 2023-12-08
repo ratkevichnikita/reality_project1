@@ -14,10 +14,10 @@ import Loader from "../../components/Loader/Loader";
 import CardParams from "../../components/Card/CardParams/CardParams";
 import CardVideo from "../../components/Card/CardVideo/CardVideo";
 import CardDescription from "../../components/Card/CardDescription/CardDescription";
-
-import "./styles.scss";
 import SpecialProducts from "../../components/SpecialProducts/SpecialProducts";
 import Footer from "../../components/Footer/Footer";
+
+import "./styles.scss";
 
 const PersonalCard = () => {
   const { id } = useParams();

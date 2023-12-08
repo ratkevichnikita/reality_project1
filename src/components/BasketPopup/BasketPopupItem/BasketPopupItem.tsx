@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from "react";
 
-import bin from "../../../assets/images/bin.svg";
+import closeBtn from "../../../assets/images/close.svg";
 
 import "./styles.scss";
 import { getDiscountPrice } from "../../../utils/helpers";
@@ -57,7 +57,7 @@ const BasketPopupItem: FC<BasketPopupItemProps> = ({
         className="basket-popup__item-bin-btn"
         onClick={() => dispatch(removeFromFavorites(id))}
       >
-        <img src={bin} alt="bin" />
+        <img src={closeBtn} alt="close btn" />
       </button>
     </li>
   );
