@@ -14,7 +14,7 @@
     display: inline-block;
     width: 50px;
     height: 23px;
-    background-image: url("../../assets//images//Vector.svg");
+    background-image: url("../../../assets/images/Vector.svg");
     background-size: contain;
     background-repeat: no-repeat;
     padding-top: 6.21px;
@@ -70,8 +70,8 @@
   &__button {
     width: 129px;
     height: 40px;
-    border: 1px solid var(--accent-text-color);
     color: var(--accent-text-color);
+    border: 1px solid currentColor;
 
     font-size: 14px;
     font-weight: 400;
@@ -80,6 +80,11 @@
 
     &:hover {
       opacity: 0.7;
+    }
+
+    &_remove {
+      color: #e7b7b7;
+      border-color: currentColor;
     }
   }
 }

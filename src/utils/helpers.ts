@@ -31,5 +31,5 @@ export const calculateTotalPrices = (productList: TProduct[]) => {
   const totalDiscountNumber = getDiscountPrice(totalDiscount.toString(), null);
   const totalDiscountPrice = getDiscountPrice(discountSum.toString(), null);
 
-  return [totalRawPrice, totalDiscountNumber, totalDiscountPrice];
+  return { totalRawPrice, totalDiscountNumber, totalDiscountPrice };
 };

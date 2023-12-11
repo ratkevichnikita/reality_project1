@@ -1,11 +1,16 @@
-import "./styles.scss";
+import { FC, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 import { TProduct } from "../../../redux/services/api.types";
-import { FC } from "react";
-import { Link } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
+import {
+  addToFavorites,
+  removeFromFavorites,
+} from "../../../redux/productsSlice";
+
 import { getDiscountPrice } from "../../../utils/helpers";
-import { useAppDispatch } from "../../../redux/hooks";
-import { addToFavorites } from "../../../redux/productsSlice";
+
+import "./styles.scss";
 
 export type ProductItemProps = Pick<
   TProduct,
@@ -20,8 +25,16 @@ const ProductItem: FC<ProductItemProps> = ({
   id,
   isNew,
 }) => {
+  const [isFavorite, setIsFavorite] = useState(false);
   const dispatch = useAppDispatch();
+  const { favoritesProducts } = useAppSelector((store) => store.products);
   const discountPrice = getDiscountPrice(price, discount);
+
+  useEffect(() => {
+    favoritesProducts.some((el) => el.id === id)
+      ? setIsFavorite(false)
+      : setIsFavorite(true);
+  }, [favoritesProducts, id]);
 
   return (
     <div className="product-item">
@@ -43,12 +56,21 @@ const ProductItem: FC<ProductItemProps> = ({
           <span className="product-item__discount-price">{discountPrice}</span>
         )}
       </div>
-      <button
-        className="product-item__button"
-        onClick={() => dispatch(addToFavorites(id))}
-      >
-        Купить
-      </button>
+      {isFavorite ? (
+        <button
+          className="product-item__button"
+          onClick={() => dispatch(addToFavorites(id))}
+        >
+          Купить
+        </button>
+      ) : (
+        <button
+          className="product-item__button product-item__button_remove"
+          onClick={() => dispatch(removeFromFavorites(id))}
+        >
+          Х
+        </button>
+      )}
     </div>
   );
 };
