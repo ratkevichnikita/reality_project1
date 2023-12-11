@@ -4,6 +4,15 @@ import { TCategories, TColor, TSortingFilter } from "../assets/types";
 import { getDiscount } from "../utils/helpers";
 import { categories, colorList, sortingFilters } from "../assets/constants";
 
+const favoriteProductsFromLocalStore = (() => {
+  const item = localStorage.getItem("favoriteProducts");
+  if (item) {
+    return JSON.parse(item);
+  } else {
+    return [];
+  }
+})();
+
 interface ProductState {
   products: TProduct[];
   sortedProducts: TProduct[];
@@ -23,7 +32,7 @@ const initialState: ProductState = {
   sortedProducts: [],
   catalogProducts: [],
   similarProducts: [],
-  favoritesProducts: [],
+  favoritesProducts: favoriteProductsFromLocalStore,
   currentColorList: [],
   sortingFilters,
   categories,
@@ -48,7 +57,7 @@ const productsSlice = createSlice({
   name: "products",
   initialState,
   reducers: {
-    filterProductsByCategory: (state, action) => {
+    filterProductsByCategory: (state, action: PayloadAction<string>) => {
       const data: TProduct[] = state.products.filter((value: TProduct) =>
         action.payload === "all" ? value : value.category === action.payload,
       );
@@ -65,7 +74,7 @@ const productsSlice = createSlice({
       );
       state.categories = newCategories;
     },
-    filterProductsBySorting: (state, action) => {
+    filterProductsBySorting: (state, action: PayloadAction<string>) => {
       let data: TProduct[] = [];
       switch (action.payload) {
         case "isNew":
@@ -137,13 +146,26 @@ const productsSlice = createSlice({
       const favoriteProduct = state.products.find(
         (el) => el.id === action.payload,
       );
-      if (favoriteProduct) state.favoritesProducts.push(favoriteProduct);
+      if (
+        favoriteProduct &&
+        !state.favoritesProducts.some((el) => el.id === favoriteProduct.id)
+      ) {
+        state.favoritesProducts.push(favoriteProduct);
+        localStorage.setItem(
+          "favoriteProducts",
+          JSON.stringify(state.favoritesProducts),
+        );
+      }
     },
     removeFromFavorites: (state, action: PayloadAction<string>) => {
       const newFavoriteProducts = state.favoritesProducts.filter(
         (el) => el.id !== action.payload,
       );
       state.favoritesProducts = newFavoriteProducts;
+      localStorage.setItem(
+        "favoriteProducts",
+        JSON.stringify(state.favoritesProducts),
+      );
     },
   },
   extraReducers: (builder) => {

@@ -2,8 +2,7 @@ import { FC } from "react";
 import { Link } from "react-router-dom";
 
 import { useAppSelector } from "../../redux/hooks";
-import { TProduct } from "../../redux/services/api.types";
-import { getDiscount, getDiscountPrice } from "../../utils/helpers";
+import { calculateTotalPrices } from "../../utils/helpers";
 
 import BasketPopupItem from "./BasketPopupItem/BasketPopupItem";
 
@@ -20,17 +19,7 @@ const BasketPopup: FC<BasketPopupProps> = ({
 }) => {
   const { favoritesProducts } = useAppSelector((store) => store.products);
 
-  const getTotalPrice = (products: TProduct[]) => {
-    const total = products.reduce((acc: number, current) => {
-      const price = getDiscount(current.price, current.discount);
-      acc += price;
-      return acc;
-    }, 0);
-
-    return getDiscountPrice(total.toString(), null);
-  };
-
-  const totalPrice = getTotalPrice(favoritesProducts);
+  const { totalDiscountPrice } = calculateTotalPrices(favoritesProducts);
 
   return (
     <div
@@ -70,7 +59,7 @@ const BasketPopup: FC<BasketPopupProps> = ({
         </ul>
         <div className="basket-popup__result">
           <p className="basket-popup__result-text">Итоговая цена</p>
-          <p className="basket-popup__result-price">{totalPrice}</p>
+          <p className="basket-popup__result-price">{totalDiscountPrice}</p>
         </div>
         <Link className="basket-popup__link" to="/basket">
           Перейти в корзину

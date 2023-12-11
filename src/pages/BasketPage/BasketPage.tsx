@@ -16,7 +16,7 @@ import "./styles.scss";
 const BasketPage = () => {
   const dispatch = useAppDispatch();
   const { favoritesProducts } = useAppSelector((state) => state.products);
-  const [totalRawPrice, totalDiscountNumber, totalDiscountPrice] =
+  const { totalRawPrice, totalDiscountNumber, totalDiscountPrice } =
     calculateTotalPrices(favoritesProducts);
   return (
     <div className="basket-page">
